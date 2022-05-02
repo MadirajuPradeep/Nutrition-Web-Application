@@ -1,0 +1,84 @@
+﻿@model IEnumerable<NutritionWebApplication.Models.Food>
+
+@{
+    ViewData["Title"] = "Foods";
+}
+
+<section class="py-5 z-index-1" style="margin-bottom: -10rem">
+
+    <div class="container">
+        <div class="card py-5 px-5 border-0 shadow-sm">
+            <div class="card-body">
+                <div class="row flex-center">
+                    <div class="col-12 col-lg-12 text-lg-start">
+                        <h1>Foods </h1>
+                        <p></p>
+
+                        <p>
+                            <a class="btn btn-lg btn-danger hover-top btn-glow text-end" asp-action="Create">Create New</a>
+@*                            <a class="btn btn-lg btn-danger hover-top btn-glow text-end" asp-action="Create" asp-controller="Categories">Create Owner</a>
+                            <a class="btn btn-lg btn-danger hover-top btn-glow text-end" asp-action="Create" asp-controller="Owners">Create Category</a>*@
+                        </p>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Owner)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Category)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Protein)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Carbohydrate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Fat)
+                                </th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var item in Model) {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Owner.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Category.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Protein)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Carbohydrate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Fat)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end of .container-->
+
+</section>
+

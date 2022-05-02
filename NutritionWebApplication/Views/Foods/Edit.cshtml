@@ -1,0 +1,70 @@
+﻿@model NutritionWebApplication.Models.Food
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<section class="py-5 z-index-1" style="margin-bottom: -10rem">
+
+<div class="container">
+<div class="card py-5 px-5 border-0 shadow-sm">
+<div class="card-body">
+<div class="row flex-center">
+<div class="col-12 col-lg-12 text-lg-start">
+<h1>Edit</h1>
+
+<h4>Food</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OwnerId" class="control-label"></label>
+                <select asp-for="OwnerId" class="form-control" asp-items="ViewBag.OwnerId"></select>
+                <span asp-validation-for="OwnerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Protein" class="control-label"></label>
+                <input asp-for="Protein" class="form-control" />
+                <span asp-validation-for="Protein" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Carbohydrate" class="control-label"></label>
+                <input asp-for="Carbohydrate" class="form-control" />
+                <span asp-validation-for="Carbohydrate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fat" class="control-label"></label>
+                <input asp-for="Fat" class="form-control" />
+                <span asp-validation-for="Fat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-lg btn-danger hover-top btn-glow text-end" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+    <!-- end of .container-->
+
+</section>

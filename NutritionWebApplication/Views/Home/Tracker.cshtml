@@ -1,0 +1,54 @@
+﻿@using Nutrition.Models
+@model Nutrition.Models.TrackerViewModel
+
+<link href="@Url.Content("~/css/tracker.css")" rel="stylesheet"/>
+<div class="main">
+
+    <h1 id="title" style="margin: 50px;"> Nutrition Tracker</h1>
+    <p id="description">
+        Track everything you eat in as little as a minute with nutrition tracker!
+    </p>
+
+    <div class="main-content">
+        <div class="form-content">
+            @using (Html.BeginForm())
+            {
+                <label for="dropdown" style="color:#fff">Choose the food category</label>
+                @Html.DropDownListFor(x => x.SelectedCategoryValue, Model.CategoryValues, new { id = "dropdown"  })
+
+@*                <label for="dropdown" style="color:#fff">Choose the brand</label>
+                @Html.DropDownListFor(x => x.SelectedBrandValue, Model.BrandValues, new { id = "dropdown"  })*@
+
+
+
+                <button type="submit" id="submit"> Search</button>
+            }
+
+            <table class="GeneratedTable">
+                <thead>
+                    <tr>
+                        <th>Number</th>
+                        <th>Name</th>
+                        <th>Amount</th>
+                        <th>Unit Name</th>
+                        <th>Derivation Code</th>
+                        <th>Derivation Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (NutrientsData nutrient in Model.Nutrients)
+                    {
+                        <tr>
+                            <td>@nutrient.number</td>
+                            <td>@nutrient.name</td>
+                            <td>@nutrient.amount</td>
+                            <td>@nutrient.unitName</td>
+                            <td>@nutrient.derivationCode</td>
+                            <td>@nutrient.derivationDescription</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

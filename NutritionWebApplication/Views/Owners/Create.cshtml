@@ -1,0 +1,47 @@
+﻿@model NutritionWebApplication.Models.Owner
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<section class="py-5 z-index-1" style="margin-bottom: -10rem">
+
+<div class="container">
+<div class="card py-5 px-5 border-0 shadow-sm">
+<div class="card-body">
+<div class="row flex-center">
+<div class="col-12 col-lg-12 text-lg-start">
+
+
+<h1>Create</h1>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Foods">Back to List</a>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+    <!-- end of .container-->
+
+</section>
+

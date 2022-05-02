@@ -1,0 +1,136 @@
+﻿@model List<FoodView>
+
+    @{
+    ViewData["Title"] = "Trackers";
+    }
+
+
+
+    <!-- ============================================-->
+    <!-- <section> begin ============================-->
+    <section class="py-5 z-index-1" style="margin-bottom: -10rem">
+
+        <div class="container">
+
+            <div class="card py-5 px-5 border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="row flex-center">
+                        <form asp-action="Trackers">
+                            <div class="col-12 col-lg-12">
+                                <label for="dropdown">Choose the food category</label>
+                                <select class="form-control" asp-items="ViewBag.CategoryId" name="q"></select>
+                            </div>
+
+@*                            <div class="col-12 col-lg-12">
+                                <label for="dropdown">Choose the brand</label>
+                                <select class="form-control" asp-items="ViewBag.BrandId" name="owner"></select>
+                            </div>*@
+
+                            <div style="width: 150px; float: right">
+                                <button type="submit" id="btnSubmit" class="btn btn btn-danger hover-top btn-glow text-end mt-2"> Search</button>
+                            </div>
+                        </form>
+
+
+                        <div class="col-12 col-lg-12 table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Brand</th>
+                                        <th>Owner</th>
+                                        <th>Description</th>
+                                        <th>Protein</th>
+                                        <th>Fat</th>
+                                        <th>Carbohydrate</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (FoodView view in Model)
+                                    {
+                                    <tr>
+                                        <td>@view.foodCategory</td>
+                                        <td>@view.brandName</td>
+                                        <td>@view.brandOwner</td>
+                                        <td>@view.description</td>
+                                        <td>@view.foodNutrients.FirstOrDefault(c=>c.nutrientName == "Protein")?.value gm</td>
+                                        <td>@view.foodNutrients.FirstOrDefault(c=>c.nutrientName == "Total lipid (fat)")?.value gm</td>
+                                        <td>@view.foodNutrients.FirstOrDefault(c=>c.nutrientName == "Carbohydrate, by difference")?.value gm</td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card py-5 px-5 border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="row flex-center">
+                        <div class="col-12 col-lg-12">
+                            <div id="chart-Data">
+                                <h2 class="coin_Updates" style="position:center;">Food Chart</h2>
+                                <canvas id="barchartexample" width="400px" height="150px"></canvas>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end of .container-->
+
+    </section>
+    <!-- <section> close ============================-->
+    <!-- ============================================-->
+
+
+    @section Scripts
+{
+        <script src="/js/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
+        <script>
+            $(document).ready(function () {
+
+                $("#dropdown1").val('@ViewData["q"]');
+                $("#dropdown2").val('@ViewData["owner"]');
+
+
+                if ('@ViewBag.doit' === "do") {
+                    fetch('@Url.Action("ReadChartTrackers", "Home")?q=@ViewData["q"]&owner=@ViewData["owner"]')
+                        .then(response => response.json())
+                        .then(c => {
+
+
+                            var labels = c.labels;
+                            var data = {
+                                labels: labels,
+                                datasets: [{
+                                    label: 'My First Dataset',
+                                    data: c.data,
+                                    fill: false,
+                                    borderColor: 'rgb(75, 192, 192)',
+                                    tension: 0.1
+                                }]
+                            };
+                            var config = {
+                                type: 'line',
+                                data: data,
+                            };
+                            var ctx = document.querySelector('#barchartexample').getContext('2d');
+
+                            var stackedLine = new Chart(ctx, config);
+
+                        });
+                }
+
+
+
+
+        });
+
+
+        </script>
+    }
